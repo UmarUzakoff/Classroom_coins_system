@@ -13,11 +13,14 @@ const tokenMiddleware: RequestHandler = async (
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies.token;
-    if (!token) {
-      return res.status(401).json({ message: "Invalid token!" });
-    }
+    const token =
+      req.headers["authorization"] &&
+      req.headers["authorization"].split(" ")[1];
+
+    if (!token) throw new CustomError("Invalid tokenn!", 401);
+
     const findUser = verify(token);
+
     const verifiedUser = await User.findOne({
       where: { email: findUser.email },
     });

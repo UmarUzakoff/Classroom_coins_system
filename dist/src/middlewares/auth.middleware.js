@@ -8,10 +8,10 @@ const custom_error_1 = require("../types/custom-error");
 const jwt_1 = require("../utils/jwt");
 const tokenMiddleware = async (req, res, next) => {
     try {
-        const token = req.cookies.token;
-        if (!token) {
-            return res.status(401).json({ message: "Invalid token!" });
-        }
+        const token = req.headers["authorization"] &&
+            req.headers["authorization"].split(" ")[1];
+        if (!token)
+            throw new custom_error_1.CustomError("Invalid tokenn!", 401);
         const findUser = (0, jwt_1.verify)(token);
         const verifiedUser = await User_1.default.findOne({
             where: { email: findUser.email },

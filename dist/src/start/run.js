@@ -15,17 +15,18 @@ const run = async (app) => {
         logging: false,
     });
     const admin = await User_1.default.findOne({
-        where: { name: "admin", email: "ab@gmail.com" },
+        where: { email: "umar.uzakoff@mail.ru" },
     });
     if (!admin) {
         await User_1.default.create({
-            name: "admin",
+            name: "MuhammadUmar",
+            surname: "Uzoqov",
             password: "$2b$12$oaOaQb4hy2PRocVtMIYdwuY6CCppnkwb3PHTEGlSbFdPDV2wX3k6m",
-            email: "ab@gmail.com",
-            is_admin: true,
+            email: "umar.uzakoff@mail.ru",
+            classroom_id: 0,
+            role: "admin",
         });
     }
-    //   cron.schedule("* * * * * *", nodeCron); //This code schedules a task that runs daily at midnight
     app.all("/*", async (req, res) => {
         res.status(404).json({ error: 'Route Not Found' });
     });

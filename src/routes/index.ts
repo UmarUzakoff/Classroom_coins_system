@@ -1,7 +1,6 @@
-import admin from "./admin.routes";
 import auth from "./auth.routes";
-import channel from "./channel.routes";
-import users from "./users.routes";
-import payment from "./payment.routes";
+import classroom from "./classroom.routes";
+import students from "./students.routes";
+import grading from "./grading.routes";
 
-export default [admin, auth, channel, users, payment];
+export default [auth, classroom, students, grading];

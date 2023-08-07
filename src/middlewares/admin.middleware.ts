@@ -11,11 +11,12 @@ const isAdmin: RequestHandler = async (
     const token =
       req.headers["authorization"] &&
       req.headers["authorization"].split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ message: "Invalid token!" });
-    }
+
+    if (!token) throw new CustomError("Invalid token!", 401);
+
     const findUser = verify(token);
-    if (findUser.email !== "ab@gmail.com")
+
+    if (findUser.email !== "umar.uzakoff@mail.ru")
       throw new CustomError(
         "This route is only accessible by administrator!",
         403

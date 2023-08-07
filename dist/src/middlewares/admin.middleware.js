@@ -6,11 +6,10 @@ const isAdmin = async (req, res, next) => {
     try {
         const token = req.headers["authorization"] &&
             req.headers["authorization"].split(" ")[1];
-        if (!token) {
-            return res.status(401).json({ message: "Invalid token!" });
-        }
+        if (!token)
+            throw new custom_error_1.CustomError("Invalid token!", 401);
         const findUser = (0, jwt_1.verify)(token);
-        if (findUser.email !== "ab@gmail.com")
+        if (findUser.email !== "umar.uzakoff@mail.ru")
             throw new custom_error_1.CustomError("This route is only accessible by administrator!", 403);
         next();
     }
